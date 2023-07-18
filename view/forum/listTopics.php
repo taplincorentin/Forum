@@ -9,8 +9,6 @@ $topics = $result["data"]['topics'];
 <?php
 
 foreach ($topics as $topic) {
-    var_dump($topic);
-    die;
     ?>
     <p><a href='index.php?ctrl=forum&action=listPosts&id=<?= $topic->getId() ?>'><?= $topic->getTitle() ?></a></p>
     <?php

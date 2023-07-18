@@ -20,7 +20,7 @@ class TopicManager extends Manager
     public function findTopics($id)
     {
 
-        $sql = "SELECT *
+        $sql = "SELECT id_topic, title, creation_date, locked, category_id, user_id
                     FROM " . $this->tableName . " a
                     INNER JOIN category c
                     ON a.category_id = c.id_category

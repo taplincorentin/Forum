@@ -12,6 +12,7 @@ foreach ($posts as $post) {
     ?>
     <p>
         <?= $post->getContent() ?>
+        <?= $post->getId() ?>
     </p>
     <?php
 }

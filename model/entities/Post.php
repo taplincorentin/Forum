@@ -7,9 +7,9 @@ final class Post extends Entity
 {
     private $id;
     private $content;
-    private $user;
+    private User $user;
     private $creationdate;
-    private $topic;
+    private Topic $topic;
 
     public function __construct($data)
     {

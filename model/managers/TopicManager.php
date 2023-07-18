@@ -15,5 +15,17 @@
             parent::connect();
         }
 
+        public function findTopics($id){
 
+            $sql = "SELECT *
+                    FROM ".$this->tableName." a
+                    INNER JOIN category c
+                    ON a.category_id = c.id_category
+                    WHERE c.id_category =".$id;
+
+            return $this->getMultipleResults(
+                DAO::select($sql), 
+                $this->className
+            );
+        }
     }

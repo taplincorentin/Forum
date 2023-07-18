@@ -39,7 +39,10 @@ final class Post extends Entity
         return $formattedDate;
     }
 
-    
+    public function getTopic()
+    {
+        return $this->topic;
+    }
 
 
 
@@ -65,6 +68,12 @@ final class Post extends Entity
     public function setCreationdate($date)
     {
         $this->creationdate = new \DateTime($date);
+        return $this;
+    }
+
+    public function setTopic($topic)
+    {
+        $this->topic = $topic;
         return $this;
     }
 }

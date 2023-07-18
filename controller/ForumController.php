@@ -59,6 +59,19 @@ class ForumController extends AbstractController implements ControllerInterface
 
     }
 
+    public function userProfile($id)
+    {
+
+        $userManager = new UserManager();
+
+        return [
+            "view" => VIEW_DIR . "forum/userProfile.php",
+            "data" => [
+                "user" => $userManager->findOneById($id)
+            ]
+        ];
+    }
+
 
 
 }

@@ -22,13 +22,9 @@ class PostManager extends Manager
             "ORDER BY " . $order[0] . " " . $order[1] :
             "";
 
-        $sql = "SELECT id_post, content, id_topic, id_user, username, email
-                    FROM " . $this->tableName . " a
-                    INNER JOIN topic t
-                    ON a.topic_id = t.id_topic
-                    INNER JOIN user u
-                    ON a.user_id = u.id_user
-                    WHERE t.id_topic =" . $id . " " . $orderQuery;
+        // a.id_post, a.content, a.creation_date, t.id_topic, t.title, t.creation_date, u.id_user, u.username, u.email, u.creation_date 
+        $sql = "SELECT *
+                    FROM " . $this->tableName . " a WHERE a.topic_id =" . $id . " " . $orderQuery;
 
 
         return $this->getMultipleResults(

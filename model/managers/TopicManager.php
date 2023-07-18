@@ -17,7 +17,7 @@ class TopicManager extends Manager
     }
 
     public function findTopics($id, $order)
-    {   
+    {
         $orderQuery = ($order) ?
             "ORDER BY " . $order[0] . " " . $order[1] :
             "";
@@ -27,7 +27,7 @@ class TopicManager extends Manager
                     FROM " . $this->tableName . " a
                     INNER JOIN category c
                     ON a.category_id = c.id_category
-                    WHERE c.id_category =" . $id." ".$orderQuery;
+                    WHERE c.id_category =" . $id . " " . $orderQuery;
 
         return $this->getMultipleResults(
             DAO::select($sql),

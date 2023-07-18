@@ -23,7 +23,7 @@ final class User extends Entity
         return $this->id;
     }
 
-    public function getUserame()
+    public function getUsername()
     {
         return $this->username;
     }
@@ -76,7 +76,7 @@ final class User extends Entity
         return $this;
     }
 
-    public function setName($email)
+    public function setEmail($email)
     {
         $this->email = $email;
         return $this;

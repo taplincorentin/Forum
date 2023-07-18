@@ -8,9 +8,11 @@ $posts = $result["data"]['posts'];
 
 <?php
 foreach ($posts as $post) {
-
+    var_dump($post);
     ?>
     <p>
+        <?= $post->getCreationdate() ?>
+        <?= $post->getUser()->getUsername() ?>
         <?= $post->getContent() ?>
         <?= $post->getId() ?>
     </p>

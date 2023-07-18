@@ -38,7 +38,7 @@ class ForumController extends AbstractController implements ControllerInterface
         return [
             "view" => VIEW_DIR . "forum/listTopics.php",
             "data" => [
-                "topics" => $topicManager->findTopics($id, ['a.creation_date', 'DESC'])
+                "topics" => $topicManager->findTopics($id, ['a.creationdate', 'DESC'])
             ]
         ];
 
@@ -51,7 +51,7 @@ class ForumController extends AbstractController implements ControllerInterface
         return [
             "view" => VIEW_DIR . "forum/listPosts.php",
             "data" => [
-                "posts" => $postManager->findPosts($id, ['a.creation_date', 'DESC'])
+                "posts" => $postManager->findPosts($id, ['creationdate', 'DESC'])
             ]
         ];
 

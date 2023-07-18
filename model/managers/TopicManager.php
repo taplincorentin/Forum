@@ -23,11 +23,7 @@ class TopicManager extends Manager
             "";
 
 
-        $sql = "SELECT id_topic, title, creation_date, locked, category_id, user_id
-                    FROM " . $this->tableName . " a
-                    INNER JOIN category c
-                    ON a.category_id = c.id_category
-                    WHERE c.id_category =" . $id . " " . $orderQuery;
+        $sql = "SELECT * FROM " . $this->tableName . " a WHERE a.category_id =" . $id . " " . $orderQuery;
 
         return $this->getMultipleResults(
             DAO::select($sql),

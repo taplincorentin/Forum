@@ -5,6 +5,7 @@ namespace Controller;
 use App\Session;
 use App\AbstractController;
 use App\ControllerInterface;
+use Model\Entities\Post;
 use Model\Managers\CategoryManager;
 use Model\Managers\TopicManager;
 use Model\Managers\PostManager;
@@ -52,7 +53,7 @@ class ForumController extends AbstractController implements ControllerInterface
         return [
             "view" => VIEW_DIR . "forum/listPosts.php",
             "data" => [
-                "posts" => $postManager->findPosts($id, ['creationdate', 'DESC'])
+                "posts" => $postManager->findPosts($id, ['creationdate', 'ASC'])
             ]
         ];
 
@@ -73,6 +74,60 @@ class ForumController extends AbstractController implements ControllerInterface
         ];
     }
 
+    public function addTopic($id){
+        if(isset($_POST['submit'])){
+            $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+            //checking there are no null or false value after filter
+            if($title){
+                $title = $_REQUEST["title"];
+                $content = $_REQUEST["content"];
+            }
+        }
+        
+        else {
+            echo 'error';
+            die;
+        }
+
+        $data =["title"=>$title, 'user_id'=>1, 'category_id'=>$id];
+        $topicManager = new TopicManager();
+        $idT = $topicManager->add($data);
+
+        
+        $data =["content"=>$content, 'user_id'=>1, 'topic_id'=>$idT];
+        $postManager = new PostManager();
+        $postManager->add($data);
+
+
+        header("Location: index.php?ctrl=forum&action=listPosts&id=".$idT);
+
+        
+    }
+
+    public function addPost($id){
+        if(isset($_POST['submit'])){
+            $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            //checking there are no null or false value after filter
+            if($content){
+                $content = $_REQUEST["content"];
+            }
+        }
+        
+        else {
+            echo 'error';
+            die;
+        }
+
+        $data =["content"=>$content, 'user_id'=>1, 'topic_id'=>$id];
+        
+        $postManager = new PostManager();
+        $postManager->add($data);
+
+        header("Location: index.php?ctrl=forum&action=listPosts&id=".$id);
+        
+    }
 
 }

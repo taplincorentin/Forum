@@ -15,6 +15,7 @@ foreach ($posts as $post) {
         <?= $post->getContent() ?>
         <?= $post->getCreationdate() ?>
         <a href="index.php?ctrl=forum&action=deletePost&id=<?= $post->getId() ?>">x</a>
+        <a href="index.php?ctrl=forum&action=editPost&id=<?= $post->getId() ?>">o</a>
     </p>
     <?php
 }

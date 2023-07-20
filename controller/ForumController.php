@@ -153,8 +153,42 @@ class ForumController extends AbstractController implements ControllerInterface
         header("Location: index.php?ctrl=forum&action=listTopics&id=".$categoryId);
     }
 
-    public function editPost(){
+    public function editPostForm($id){
+        $postManager = new PostManager();
         
+        return [
+            "view" => VIEW_DIR . "forum/editPostForm.php",
+            "data" => [
+                "post" => $postManager->findOneById($id)
+            ]
+        ];
+
+
+    }
+
+    public function editPost($id){
+        
+        //testing edited data
+        if(isset($_POST['submit'])){
+            $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            //checking there are no null or false value after filter
+            if($content){
+                $content = $_REQUEST["content"];
+            }
+        }
+        
+        else {
+            echo 'error';
+            die;
+        }
+
+        $data =["content"=>$content, 'user_id'=>1, 'topic_id'=>$id];
+        
+        $postManager = new PostManager();
+        $postManager->add($data);
+
+        header("Location: index.php?ctrl=forum&action=listPosts&id=".$id);
     }
 
 }

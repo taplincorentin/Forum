@@ -75,8 +75,8 @@ class ForumController extends AbstractController implements ControllerInterface
 
     public function addTopic($id){
         if(isset($_POST['submit'])){
-            $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+            $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
 
             //checking there are no null or false value after filter
             if($title){
@@ -107,7 +107,7 @@ class ForumController extends AbstractController implements ControllerInterface
 
     public function addPost($id){
         if(isset($_POST['submit'])){
-            $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
             
             //checking there are no null or false value after filter
             if($content){
@@ -170,7 +170,7 @@ class ForumController extends AbstractController implements ControllerInterface
         
         //testing edited data
         if(isset($_POST['submit'])){
-            $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
             
             //checking there are no null or false value after filter
             if($content){

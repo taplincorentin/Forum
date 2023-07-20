@@ -32,4 +32,13 @@ class PostManager extends Manager
         );
     }
 
+    public function findTopicIdFromPost($id){
+        $sql = "SELECT id_topic FROM topic t INNER JOIN post p ON t.id_topic = p.topic_id WHERE p.id_post =".$id;
+
+        return $this->getMultipleResults(
+            DAO::select($sql),
+            $this->className
+        );
+    }
+
 }

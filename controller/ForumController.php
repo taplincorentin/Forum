@@ -74,6 +74,7 @@ class ForumController extends AbstractController implements ControllerInterface
         ];
     }
 
+
     public function addTopic($id){
         if(isset($_POST['submit'])){
             $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -138,10 +139,10 @@ class ForumController extends AbstractController implements ControllerInterface
         header("Location: index.php?ctrl=forum&action=listPosts&id=3");
     }
 
-    public function deleteTopic($id){
+    /*public function deleteTopic($id){
 
         $topicManager = new TopicManager();
         $topicManager 
-    }
+    }*/
 
 }

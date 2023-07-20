@@ -8,6 +8,14 @@ $posts = $result["data"]['posts'];
 <h2><?= $posts->current()->getTopic()->getTitle() ?></h2>
 
 <?php
+    if($posts->current()->getTopic()->getLocked()==0){
+?>
+        <form action="index.php?ctrl=forum&action=lockTopic&id=<?=$id?>">
+            <input type="submit" value="lock topic" />
+        </form>
+<?php
+    }
+
 foreach ($posts as $post) {
     ?>
     <p>

@@ -10,7 +10,7 @@ final class Topic extends Entity
         private $title;
         private User $user;
         private $creationdate;
-        private $closed;
+        private $locked;
         private Category $category;
 
         public function __construct($data)
@@ -95,9 +95,9 @@ final class Topic extends Entity
         /**
          * Get the value of closed
          */
-        public function getClosed()
+        public function getLocked()
         {
-                return $this->closed;
+                return $this->locked;
         }
 
         /**
@@ -105,9 +105,9 @@ final class Topic extends Entity
          *
          * @return  self
          */
-        public function setClosed($closed)
+        public function setLocked($locked)
         {
-                $this->closed = $closed;
+                $this->locked = $locked;
 
                 return $this;
         }

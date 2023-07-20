@@ -10,9 +10,9 @@ $posts = $result["data"]['posts'];
 <?php
     if($posts->current()->getTopic()->getLocked()==0){
 ?>
-        <form action="index.php?ctrl=forum&action=lockTopic&id=<?=$id?>">
-            <input type="submit" value="lock topic" />
-        </form>
+        <a href="index.php?ctrl=forum&action=lockTopic&id=<?=$id?>">
+            lock topic
+        </a>
 <?php
     }
 

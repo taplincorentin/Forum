@@ -46,7 +46,7 @@ class PostManager extends Manager
                     SET content = :content
                     WHERE id_post = :id";
 
-        return DAO::delete($sql, ['id' => $id,
+        return DAO::update($sql, ['id' => $id,
                                 'content' => $content]);
     }
 

@@ -192,4 +192,12 @@ class ForumController extends AbstractController implements ControllerInterface
         header("Location: index.php?ctrl=forum&action=listPosts&id=".$idT);
     }
 
+    public function lockTopic($id){
+        
+        $topicManager = new TopicManager();
+        $topicManager->lockTopic($id);
+
+        header("Location: index.php?ctrl=forum&action=listPosts&id=".$id);
+    }
+
 }

@@ -2,10 +2,10 @@
 
 $posts = $result["data"]['posts'];
 
-/*<?= $posts->current()->getTopic()->getTitle() ?>*/
-?>
 
-<h1><?= $posts->current()->getTopic()->getTitle() ?></h1>
+?>
+<h1><?= $posts->current()->getTopic()->getCategory()->getName()?></h1>
+<h2><?= $posts->current()->getTopic()->getTitle() ?></h2>
 
 <?php
 foreach ($posts as $post) {

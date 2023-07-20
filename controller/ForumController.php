@@ -183,12 +183,15 @@ class ForumController extends AbstractController implements ControllerInterface
             die;
         }
 
-        $data =["content"=>$content, 'user_id'=>1, 'topic_id'=>$id];
+        
         
         $postManager = new PostManager();
-        $postManager->add($data);
 
-        header("Location: index.php?ctrl=forum&action=listPosts&id=".$id);
+        $post = $postManager->findOneById($id);
+        $idT = $post->getTopic()->getId();
+        $postManager->updatePost($id, $content);
+
+        header("Location: index.php?ctrl=forum&action=listPosts&id=".$idT);
     }
 
 }

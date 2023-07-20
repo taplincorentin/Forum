@@ -41,4 +41,13 @@ class PostManager extends Manager
         );
     }
 
+    public function updatePost($id,$content){
+        $sql = "UPDATE post
+                    SET content = :content
+                    WHERE id_post = :id";
+
+        return DAO::delete($sql, ['id' => $id,
+                                'content' => $content]);
+    }
+
 }

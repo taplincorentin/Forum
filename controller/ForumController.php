@@ -154,8 +154,6 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $topicManager->delete($id);
 
-        
-
         header("Location: index.php?ctrl=forum&action=listTopics&id=".$categoryId);
     }
 

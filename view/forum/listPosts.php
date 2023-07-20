@@ -19,7 +19,7 @@ foreach ($posts as $post) {
     </p>
     <?php
 }
-
+ 
 ?>
 
 

@@ -84,7 +84,7 @@ class ForumController extends AbstractController implements ControllerInterface
                 $content = $_REQUEST["content"];
             }
         }
-        
+         
         else {
             echo 'error';
             die;
@@ -132,17 +132,25 @@ class ForumController extends AbstractController implements ControllerInterface
     public function deletePost($id){
 
         $postManager = new PostManager();
+        $post = $postManager->findOneById($id);
+        $topicId = $post->getTopic()->getId();
         $postManager->delete($id);
         
-        header("Location: index.php?ctrl=forum&action=listPosts&id=7");
+        header("Location: index.php?ctrl=forum&action=listPosts&id=".$topicId);
     }
 
     public function deleteTopic($id){
 
         $topicManager = new TopicManager();
+
+        $topic = $topicManager->findOneById($id);
+        $categoryId = $topic->getCategory()->getId();
+
         $topicManager->delete($id);
 
-        header("Location: index.php?ctrl=forum&action=listTopics&id=1");
+        
+
+        header("Location: index.php?ctrl=forum&action=listTopics&id=".$categoryId);
     }
 
     public function editPost(){

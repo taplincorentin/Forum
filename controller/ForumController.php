@@ -74,6 +74,7 @@ class ForumController extends AbstractController implements ControllerInterface
 
 
     public function addTopic($id){
+        //testing added data
         if(isset($_POST['submit'])){
             $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
             $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -89,12 +90,12 @@ class ForumController extends AbstractController implements ControllerInterface
             echo 'error';
             die;
         }
-
+        //topic values
         $data =["title"=>$title, 'user_id'=>1, 'category_id'=>$id];
         $topicManager = new TopicManager();
         $idT = $topicManager->add($data);
 
-        
+        //first post values
         $data =["content"=>$content, 'user_id'=>1, 'topic_id'=>$idT, 'op'=>1];
         $postManager = new PostManager();
         $postManager->add($data);
@@ -106,6 +107,7 @@ class ForumController extends AbstractController implements ControllerInterface
     }
 
     public function addPost($id){
+        //testing added data
         if(isset($_POST['submit'])){
             $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
             
@@ -132,8 +134,11 @@ class ForumController extends AbstractController implements ControllerInterface
     public function deletePost($id){
 
         $postManager = new PostManager();
+
+        //get topic id for redirection
         $post = $postManager->findOneById($id);
         $topicId = $post->getTopic()->getId();
+        
         $postManager->delete($id);
         
         header("Location: index.php?ctrl=forum&action=listPosts&id=".$topicId);
@@ -143,6 +148,7 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $topicManager = new TopicManager();
 
+        //get category id for redirection
         $topic = $topicManager->findOneById($id);
         $categoryId = $topic->getCategory()->getId();
 
@@ -185,8 +191,10 @@ class ForumController extends AbstractController implements ControllerInterface
 
         $postManager = new PostManager();
 
+        //get topic id for redirection
         $post = $postManager->findOneById($id);
         $idT = $post->getTopic()->getId();
+
         $postManager->updatePost($id, $content);
 
         header("Location: index.php?ctrl=forum&action=listPosts&id=".$idT);

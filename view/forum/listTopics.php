@@ -8,6 +8,8 @@ $topics = $result["data"]['topics'];
 
 <?php
 
+//show topics info
+
 foreach ($topics as $topic) {
     ?>
     <p>
@@ -20,6 +22,7 @@ foreach ($topics as $topic) {
     <?php
 }
 ?>
+<!-- add new topic form with first comment-->
 <form action="index.php?ctrl=forum&action=addTopic&id=<?=$id?>" method="post">
     <div> 
         <p>

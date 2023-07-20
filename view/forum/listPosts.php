@@ -4,6 +4,7 @@ $posts = $result["data"]['posts'];
 
 
 ?>
+<!-- show post's topic title and topic's category name-->
 <h1><?= $posts->current()->getTopic()->getCategory()->getName()?></h1>
 <h2><?= $posts->current()->getTopic()->getTitle() ?></h2>
 
@@ -15,7 +16,7 @@ $posts = $result["data"]['posts'];
         </a>
 <?php
     }
-
+//get each postInfos and display
 foreach ($posts as $post) {
     ?>
     <p>
@@ -35,8 +36,8 @@ foreach ($posts as $post) {
     </p>
     <?php
 }
-
-if($post->getTopic()->getLocked()==0){
+//check if topic is locked before showing post form
+if($post->getTopic()->getLocked()==0){ 
 ?>
 
 

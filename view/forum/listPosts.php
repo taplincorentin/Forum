@@ -14,8 +14,16 @@ foreach ($posts as $post) {
         <?= $post->getUser()->getUsername() ?>
         <?= $post->getContent() ?>
         <?= $post->getCreationdate() ?>
-        <a href="index.php?ctrl=forum&action=deletePost&id=<?= $post->getId() ?>">x</a>
         <a href="index.php?ctrl=forum&action=editPostForm&id=<?= $post->getId() ?>">o</a>
+        
+        <?php
+            if($post->getOp()==0){
+        ?>
+                <a href="index.php?ctrl=forum&action=deletePost&id=<?= $post->getId() ?>">x</a>
+        <?php
+            }
+        ?>
+        
     </p>
     <?php
 }

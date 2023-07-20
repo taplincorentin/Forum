@@ -95,7 +95,7 @@ class ForumController extends AbstractController implements ControllerInterface
         $idT = $topicManager->add($data);
 
         
-        $data =["content"=>$content, 'user_id'=>1, 'topic_id'=>$idT];
+        $data =["content"=>$content, 'user_id'=>1, 'topic_id'=>$idT, 'op'=>1];
         $postManager = new PostManager();
         $postManager->add($data);
 
@@ -183,8 +183,6 @@ class ForumController extends AbstractController implements ControllerInterface
             die;
         }
 
-        
-        
         $postManager = new PostManager();
 
         $post = $postManager->findOneById($id);

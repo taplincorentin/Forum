@@ -20,7 +20,7 @@ $posts = $result["data"]['posts'];
 foreach ($posts as $post) {
     ?>
     <p>
-        <?= $post->getUser()->getUsername() ?>
+        <a href='index.php?ctrl=forum&action=userProfile&id=<?= $post->getUser()->getId() ?>'><?= $post->getUser()->getUsername() ?></a>
         <?= $post->getContent() ?>
         <?= $post->getCreationdate() ?>
         <a href="index.php?ctrl=forum&action=editPostForm&id=<?= $post->getId() ?>">o</a>

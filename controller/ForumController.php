@@ -159,21 +159,8 @@ class ForumController extends AbstractController implements ControllerInterface
         header("Location: index.php?ctrl=forum&action=listTopics&id=".$categoryId);
     }
 
-    public function editPostForm($id){
-        $postManager = new PostManager();
-        
-        return [
-            "view" => VIEW_DIR . "forum/editPostForm.php",
-            "data" => [
-                "post" => $postManager->findOneById($id)
-            ]
-        ];
-
-
-    }
-
     public function editPost($id){
-        
+        $postManager = new PostManager();
         //testing edited data
         if(isset($_POST['submit'])){
             $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -181,25 +168,28 @@ class ForumController extends AbstractController implements ControllerInterface
             //checking there are no null or false value after filter
             if($content){
                 $content = $_REQUEST["content"];
-            }
+            } 
+
+            //get topic id for redirection
+            $post = $postManager->findOneById($id);
+            $idT = $post->getTopic()->getId();
+
+            $postManager->updatePost($id, $content);
+
+            header("Location: index.php?ctrl=forum&action=listPosts&id=".$idT);
         }
-        
+
         else {
-            echo 'error';
-            die;
+            return [
+                "view" => VIEW_DIR . "forum/editPostForm.php",
+                "data" => [
+                    "post" => $postManager->findOneById($id)
+                ]
+            ];
         }
 
-        $postManager = new PostManager();
-
-        //get topic id for redirection
-        $post = $postManager->findOneById($id);
-        $idT = $post->getTopic()->getId();
-
-        $postManager->updatePost($id, $content);
-
-        header("Location: index.php?ctrl=forum&action=listPosts&id=".$idT);
-    }
-
+    }     
+        
     public function lockTopic($id){
         
         $topicManager = new TopicManager();

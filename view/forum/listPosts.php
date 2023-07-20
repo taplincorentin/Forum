@@ -23,7 +23,7 @@ foreach ($posts as $post) {
         <a href='index.php?ctrl=forum&action=userProfile&id=<?= $post->getUser()->getId() ?>'><?= $post->getUser()->getUsername() ?></a>
         <?= $post->getContent() ?>
         <?= $post->getCreationdate() ?>
-        <a href="index.php?ctrl=forum&action=editPostForm&id=<?= $post->getId() ?>">o</a>
+        <a href="index.php?ctrl=forum&action=editPost&id=<?= $post->getId() ?>">o</a>
         
         <?php
             if($post->getOp()==0){

@@ -39,7 +39,7 @@
                         if($password == $password2 && strlen($password) > 7){
                             $data =["username"=>$username, 'email'=>$email , "password"=> password_hash($password, PASSWORD_DEFAULT)];
                             $userManager->add($data);
-                            header("Location:./view/security/login.php");
+                            header("Location: /security/login.html");
                         }
                         else{
                             return [
@@ -49,6 +49,13 @@
                             ];
                         }
                     }
+                }
+                else {
+                    return [
+                        //go to error page
+                        "view" => BASE_DIR . "/security/error.php", 
+                        "data" =>["error" => "problem in input of values"]
+                    ];
                 }
             }
         }

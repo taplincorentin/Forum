@@ -29,4 +29,5 @@ class UserManager extends Manager
 
         return DAO::select($sql, ['email' => $email]);
     }
+    
 }

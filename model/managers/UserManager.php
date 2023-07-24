@@ -10,8 +10,23 @@ class UserManager extends Manager
     protected $tableName = "user";
 
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::connect();
+    }
+
+    public function usernameExists($username){
+        $sql = "SELECT *
+                    FROM user 
+                    WHERE username  = :username";
+
+        return DAO::select($sql, ['username' => $username]);
+    }
+
+    public function emailExists($email){
+        $sql = "SELECT *
+                    FROM user 
+                    WHERE email  = :email";
+
+        return DAO::select($sql, ['email' => $email]);
     }
 }

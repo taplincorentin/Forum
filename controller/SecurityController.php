@@ -60,4 +60,43 @@
             }
         }
 
+        public function login(){
+            if(isset($_POST['submit'])){
+
+                $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
+                $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+                if($email && $password){
+                    $userManager = new UserManager;
+                    $user = $userManager->emailExists($email);
+                    
+                    if($user){ //if email exists in DB
+                        $hash = $user[0]['password'];
+                        if(password_verify($password, $hash)){
+                            //start session
+                        }
+                        else{
+                            return [
+                                //go to error page
+                                "view" => BASE_DIR . "/security/error.php", 
+                                "data" =>["error" => "wrong password"]
+                            ];
+                        }
+                    }
+                    else{
+                        return [
+                            //go to error page
+                            "view" => BASE_DIR . "/security/error.php", 
+                            "data" =>["error" => "user with this email doesn't exist"]
+                        ];
+                    }
+                }
+            }
+        }
+
+        public function logout(){
+            if(isset($_POST['submit'])){
+
+            }
+        }
     }

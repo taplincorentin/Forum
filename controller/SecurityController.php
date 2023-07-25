@@ -74,7 +74,6 @@
                         $hash = $emailCheck[0]['password'];
                         
                         if(password_verify($password, $hash)){
-                            session_start();
                             $id_user = $emailCheck[0]['id_user'];
                             $user = $userManager->findOneById($id_user);
                             $_SESSION['user'] = $user;
@@ -103,7 +102,7 @@
         }
 
         public function logout(){
-            if(isset($_POST['submit'])){
+            
 
                 session_unset();
                 session_destroy();
@@ -112,5 +111,5 @@
                     "view" => BASE_DIR . "/security/login.html",
                     ];
             }
-        }
+        
     }

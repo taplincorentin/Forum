@@ -19,7 +19,7 @@ foreach ($topics as $topic) {
         <a href='index.php?ctrl=forum&action=userProfile&id=<?= $topic->getUser()->getId() ?>'><?= $topic->getUser()->getUsername() ?></a>
 
         <?php
-        if(App\Session::getUser()->getId()==$topic->getUser()->getId()){
+        if(App\Session::getUser()->getId()==$topic->getUser()->getId() or \App\Session::isAdmin()){
         ?>
         <a href="index.php?ctrl=forum&action=deleteTopic&id=<?= $topic->getId() ?>">x</a>
         <?php } ?>

@@ -15,7 +15,7 @@ $posts = $result["data"]["posts"];
     foreach ($posts as $post) {
     ?>
     <p>
-        <?= $post->getTopic()->getTitle() ?>
+        <a href='index.php?ctrl=forum&action=listPosts&id=<?= $post->getTopic()->getId() ?>'><?= $post->getTopic()->getTitle() ?></a>
         <?= $post->getContent() ?>
         <?= $post->getCreationdate()?>
     <?php

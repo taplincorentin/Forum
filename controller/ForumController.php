@@ -90,7 +90,7 @@ class ForumController extends AbstractController implements ControllerInterface
                 "view" => VIEW_DIR . "forum/userProfile.php",
                 "data" => [
                     "user" => $userManager->findOneById($id),
-                    "posts" => $postManager->findPostsFromUser($id, ['creationdate', 'ASC'])
+                    "posts" => $postManager->findPostsFromUser($id, ['creationdate', 'DESC'])
                 ]
             ];
         }

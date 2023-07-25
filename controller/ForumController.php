@@ -72,6 +72,30 @@ class ForumController extends AbstractController implements ControllerInterface
         ];
     }
 
+    public function addCategory(){
+        //testing added data
+        if(isset($_POST['submit'])){
+            $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+            
+            //checking there are no null or false value after filter
+            if($name){
+                $data =["name"=>$name];
+                $categoryManager = new CategoryManager();
+                $idC = $categoryManager->add($data);
+
+                header("Location: index.php?ctrl=forum&action=listTopics&id=".$idC);
+            }
+        }
+        
+        else {
+            return [
+                //go to error page
+                "view" => BASE_DIR . "/security/error.php", 
+                "data" =>["error" => "problem in input of name"]
+            ];
+        }
+        
+    }
 
     public function addTopic($id){
         //testing added data

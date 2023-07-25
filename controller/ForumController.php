@@ -132,69 +132,115 @@ class ForumController extends AbstractController implements ControllerInterface
         
     }
 
+
     public function deletePost($id){
 
-        $postManager = new PostManager();
-
-        //get topic id for redirection
-        $post = $postManager->findOneById($id);
-        $topicId = $post->getTopic()->getId();
         
-        $postManager->delete($id);
-        
-        header("Location: index.php?ctrl=forum&action=listPosts&id=".$topicId);
-    }
-
-    public function deleteTopic($id){
-
-        $topicManager = new TopicManager();
-
-        //get category id for redirection
-        $topic = $topicManager->findOneById($id);
-        $categoryId = $topic->getCategory()->getId();
-
-        $topicManager->delete($id);
-
-        header("Location: index.php?ctrl=forum&action=listTopics&id=".$categoryId);
-    }
-
-    public function editPost($id){
-        $postManager = new PostManager();
-        //testing edited data
-        if(isset($_POST['submit'])){
-            $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
-            
-            //checking there are no null or false value after filter
-            if($content){
-                $content = $_REQUEST["content"];
-            } 
-
+        if(\App\Session::getUser()->getId()==$id or \App\Session::isAdmin()){
+            $postManager = new PostManager();
             //get topic id for redirection
             $post = $postManager->findOneById($id);
-            $idT = $post->getTopic()->getId();
-
-            $postManager->updatePost($id, $content);
-
-            header("Location: index.php?ctrl=forum&action=listPosts&id=".$idT);
+            $topicId = $post->getTopic()->getId();
+        
+            $postManager->delete($id);
+        
+            header("Location: index.php?ctrl=forum&action=listPosts&id=".$topicId);
         }
 
         else {
             return [
-                "view" => VIEW_DIR . "forum/editPostForm.php",
-                "data" => [
-                    "post" => $postManager->findOneById($id)
-                ]
+                //go to error page
+                "view" => BASE_DIR . "/security/error.php", 
+                "data" =>["error" => "not an admin or post creator"]
+            ];
+        }
+    }
+
+
+    public function deleteTopic($id){
+
+        if(\App\Session::getUser()->getId()==$id or \App\Session::isAdmin()){
+            
+            $topicManager = new TopicManager();
+
+            //get category id for redirection
+            $topic = $topicManager->findOneById($id);
+            $categoryId = $topic->getCategory()->getId();
+
+            $topicManager->delete($id);
+
+            header("Location: index.php?ctrl=forum&action=listTopics&id=".$categoryId);
+        }
+        else {
+            return [
+                //go to error page
+                "view" => BASE_DIR . "/security/error.php", 
+                "data" =>["error" => "not an admin or topic creator"]
+            ];
+        }
+    }
+
+
+    public function editPost($id){
+
+        if(\App\Session::getUser()->getId()==$id or \App\Session::isAdmin()){        
+            $postManager = new PostManager();
+            //testing edited data
+            if(isset($_POST['submit'])){
+                $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+            
+                //checking there are no null or false value after filter
+                if($content){
+                    $content = $_REQUEST["content"];
+                } 
+
+                //get topic id for redirection
+                $post = $postManager->findOneById($id);
+                $idT = $post->getTopic()->getId();
+
+                $postManager->updatePost($id, $content);
+
+                header("Location: index.php?ctrl=forum&action=listPosts&id=".$idT);
+            }
+
+            else {
+                return [
+                    "view" => VIEW_DIR . "forum/editPostForm.php",
+                    "data" => [
+                        "post" => $postManager->findOneById($id)
+                    ]
+                ];
+            }
+        }
+
+        else {
+            return [
+                //go to error page
+                "view" => BASE_DIR . "/security/error.php", 
+                "data" =>["error" => "not an admin or post creator"]
             ];
         }
 
     }     
-        
+    
+    
     public function lockTopic($id){
-        
-        $topicManager = new TopicManager();
-        $topicManager->lockTopic($id);
 
-        header("Location: index.php?ctrl=forum&action=listPosts&id=".$id);
+        if(\App\Session::getUser()->getId()==$id or \App\Session::isAdmin()){  
+            
+            $topicManager = new TopicManager();
+            $topicManager->lockTopic($id);
+
+            header("Location: index.php?ctrl=forum&action=listPosts&id=".$id);
+        }
+
+        else {
+            return [
+                //go to error page
+                "view" => BASE_DIR . "/security/error.php", 
+                "data" =>["error" => "not an admin or topic creator"]
+            ];
+        }
     }
 
 }

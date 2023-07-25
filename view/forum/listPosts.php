@@ -1,20 +1,24 @@
 <?php
 
 $posts = $result["data"]['posts'];
-
+$topic = $posts->current()->getTopic();
 
 ?>
 <!-- show post's topic title and topic's category name-->
-<h1><?= $posts->current()->getTopic()->getCategory()->getName()?></h1>
-<h2><?= $posts->current()->getTopic()->getTitle() ?></h2>
+<h1><a href='index.php?ctrl=forum&action=listTopics&id=<?= $topic->getCategory()->getId()?>'><?= $topic->getCategory()->getName()?></a></h1>
+<h2><?= $topic->getTitle() ?></h2>
 
 <?php
-    if($posts->current()->getTopic()->getLocked()==0){
+    
+    if($topic->getLocked()==0 && (\App\Session::getUser()== $topic->getUser() or \App\Session::isAdmin())){
+        
+        
 ?>
         <a href="index.php?ctrl=forum&action=lockTopic&id=<?=$id?>">
             lock topic
         </a>
 <?php
+    var_dump(\App\Session::getUser());die;
     }
 //get each postInfos and display
 foreach ($posts as $post) {

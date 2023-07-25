@@ -30,4 +30,12 @@ class UserManager extends Manager
         return DAO::select($sql, ['email' => $email]);
     }
     
+    public function updatePassword($id,$password){
+        $sql = "UPDATE user
+                    SET password = :password
+                    WHERE id_user = :id";
+
+        return DAO::update($sql, ['id' => $id,
+                                'password' => $password]);
+    }
 }

@@ -148,13 +148,14 @@
                     if($password && $password2){
                         //if username or email exists
                         if($password == $password2 && strlen($password) > 7){
-                            var_dump($password);
-                            $data =["password"=> password_hash($password, PASSWORD_DEFAULT)];
-                            var_dump($data);die;
-                            $userManager->add($data);
 
-                            /*session_unset();
-                            session_destroy();*/
+                            $hash = password_hash($password, PASSWORD_DEFAULT);
+                            
+                            $userManager->updatePassword($id,$hash);
+
+                            //make user logout
+                            session_unset();
+                            session_destroy();
 
                             header("Location: /security/login.html");
                         }

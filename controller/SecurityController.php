@@ -1,4 +1,4 @@
-<?php
+<?php 
 
     namespace Controller;
 
@@ -68,12 +68,20 @@
 
                 if($email && $password){
                     $userManager = new UserManager;
-                    $user = $userManager->emailExists($email);
+                    $emailCheck = $userManager->emailExists($email);
                     
-                    if($user){ //if email exists in DB
-                        $hash = $user[0]['password'];
+                    if($emailCheck){ //if email exists in DB
+                        $hash = $emailCheck[0]['password'];
+                        
                         if(password_verify($password, $hash)){
-                            //start session
+                            session_start();
+                            $id_user = $emailCheck[0]['id_user'];
+                            $user = $userManager->findOneById($id_user);
+                            $_SESSION['user'] = $user;
+
+                            return [
+                                "view" => VIEW_DIR . "home.php"
+                                ];
                         }
                         else{
                             return [
@@ -97,6 +105,12 @@
         public function logout(){
             if(isset($_POST['submit'])){
 
+                session_unset();
+                session_destroy();
+
+                return [
+                    "view" => VIEW_DIR . "home.php"
+                    ];
             }
         }
     }

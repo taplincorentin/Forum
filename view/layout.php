@@ -56,10 +56,10 @@
                             
                             <?php
                         }
-
-
-                        ?>
-                        <a href="index.php?ctrl=forum&action=listCategories">Categories</a>
+                        if(isset($_SESSION['user'])){
+                            ?>
+                            <a href="index.php?ctrl=forum&action=listCategories">Categories</a>
+                        <?php } ?>
                     </div>
                 </nav>
             </header>

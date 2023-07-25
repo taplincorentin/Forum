@@ -21,8 +21,8 @@ class ForumController extends AbstractController implements ControllerInterface
         ];
     }
 
-    public function listCategories()
-    {
+    public function listCategories(){
+        //checking there is a user in session
         if(isset($_SESSION['user'])){
             $categoryManager = new CategoryManager();
 
@@ -61,22 +61,28 @@ class ForumController extends AbstractController implements ControllerInterface
         }
     }
 
-    public function listPosts($id)
-    {   
+    public function listPosts($id){   
+        if(isset($_SESSION['user'])){
+            $postManager = new PostManager();
 
-        $postManager = new PostManager();
+            return [
+                "view" => VIEW_DIR . "forum/listPosts.php",
+                "data" => [
+                    "posts" => $postManager->findPosts($id, ['creationdate', 'ASC'])
+                ]
+            ];
+        }
 
-        return [
-            "view" => VIEW_DIR . "forum/listPosts.php",
-            "data" => [
-                "posts" => $postManager->findPosts($id, ['creationdate', 'ASC'])
-            ]
-        ];
+        else {
+            return [
+                "view" => BASE_DIR . "/security/login.html",
+                ];
+        }
 
     }
 
-    public function userProfile($id)
-    {
+    public function userProfile($id){
+        //checking there is a user in session
         if(isset($_SESSION['user'])){
             $userManager = new UserManager();
 
@@ -96,6 +102,7 @@ class ForumController extends AbstractController implements ControllerInterface
     }
 
     public function addCategory(){
+        //checking user in session is an admin
         if(\App\Session::isAdmin()){
             //testing added data
             if(isset($_POST['submit'])){
@@ -123,6 +130,7 @@ class ForumController extends AbstractController implements ControllerInterface
     }
 
     public function addTopic($id){
+        //checking there is a user in session
         if(isset($_SESSION['user'])){
             //testing added data
             if(isset($_POST['submit'])){
@@ -198,11 +206,12 @@ class ForumController extends AbstractController implements ControllerInterface
 
     public function deletePost($id){
 
+        $postManager = new PostManager();
+        $post = $postManager->findOneById($id);
         
-        if(\App\Session::getUser()->getId()==$id or \App\Session::isAdmin()){
-            $postManager = new PostManager();
+        if(\App\Session::getUser()==$post->getUser() or \App\Session::isAdmin()){
+            
             //get topic id for redirection
-            $post = $postManager->findOneById($id);
             $topicId = $post->getTopic()->getId();
         
             $postManager->delete($id);
@@ -222,12 +231,12 @@ class ForumController extends AbstractController implements ControllerInterface
 
     public function deleteTopic($id){
 
-        if(\App\Session::getUser()->getId()==$id or \App\Session::isAdmin()){
-            
-            $topicManager = new TopicManager();
+        $topicManager = new TopicManager();
+        $topic = $topicManager->findOneById($id);
 
+        if(\App\Session::getUser()==$topic->getUser() or \App\Session::isAdmin()){
+            
             //get category id for redirection
-            $topic = $topicManager->findOneById($id);
             $categoryId = $topic->getCategory()->getId();
 
             $topicManager->delete($id);
@@ -246,8 +255,11 @@ class ForumController extends AbstractController implements ControllerInterface
 
     public function editPost($id){
 
-        if(\App\Session::getUser()->getId()==$id or \App\Session::isAdmin()){        
-            $postManager = new PostManager();
+        $postManager = new PostManager();
+        $post = $postManager->findOneById($id);
+
+        if(\App\Session::getUser()==$post->getUser() or \App\Session::isAdmin()){        
+            
             //testing edited data
             if(isset($_POST['submit'])){
                 $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -258,7 +270,6 @@ class ForumController extends AbstractController implements ControllerInterface
                 } 
 
                 //get topic id for redirection
-                $post = $postManager->findOneById($id);
                 $idT = $post->getTopic()->getId();
 
                 $postManager->updatePost($id, $content);

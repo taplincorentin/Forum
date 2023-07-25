@@ -98,6 +98,13 @@
                         ];
                     }
                 }
+                else{
+                    return [
+                        //go to error page
+                        "view" => BASE_DIR . "/security/error.php", 
+                        "data" =>["error" => "error in username or password"]
+                    ];
+                }
             }
         }
 

@@ -41,6 +41,22 @@ class PostManager extends Manager
         );
     }
 
+    public function findPostsFromUser($id, $order)
+    {
+        $orderQuery = ($order) ?
+            "ORDER BY " . $order[0] . " " . $order[1] :
+            "";
+
+
+        $sql = "SELECT * FROM post a WHERE a.user_id =" . $id . " " . $orderQuery;
+
+
+        return $this->getMultipleResults(
+            DAO::select($sql),
+            $this->className
+        );
+    }
+
     public function updatePost($id,$content){
         $sql = "UPDATE post
                     SET content = :content

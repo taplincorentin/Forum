@@ -85,11 +85,12 @@ class ForumController extends AbstractController implements ControllerInterface
         //checking there is a user in session
         if(isset($_SESSION['user'])){
             $userManager = new UserManager();
-
+            $postManager = new PostManager();
             return [
                 "view" => VIEW_DIR . "forum/userProfile.php",
                 "data" => [
-                    "user" => $userManager->findOneById($id)
+                    "user" => $userManager->findOneById($id),
+                    "posts" => $postManager->findPostsFromUser($id, ['creationdate', 'ASC'])
                 ]
             ];
         }

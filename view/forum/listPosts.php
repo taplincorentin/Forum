@@ -27,13 +27,13 @@ foreach ($posts as $post) {
         <?= $post->getContent() ?>
         <?= $post->getCreationdate()?>
         <?php
-        if(App\Session::getUser()->getId()==$post->getUser()->getId()){
+        if(App\Session::getUser()->getId()==$post->getUser()->getId() or App\Session::isAdmin()){
         ?>
         <a href="index.php?ctrl=forum&action=editPost&id=<?= $post->getId() ?>">o</a>
         
         <?php
         }
-            if($post->getOp()==0 && App\Session::getUser()->getId()==$post->getUser()->getId()){
+            if($post->getOp()==0 && (App\Session::getUser()->getId()==$post->getUser()->getId() or App\Session::isAdmin())){
         ?>
                 <a href="index.php?ctrl=forum&action=deletePost&id=<?= $post->getId() ?>">x</a>
         <?php
@@ -66,6 +66,11 @@ else{
 ?>
 
     <h3>topic is locked</h3>
+    
+    <?php if(App\Session::isAdmin()){    ?>
+        <a href="index.php?ctrl=forum&action=unlockTopic&id=<?= $topic->getId() ?>">unlock topic</a>
+    
 
 <?php
+    }
 }

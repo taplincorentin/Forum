@@ -332,4 +332,24 @@ class ForumController extends AbstractController implements ControllerInterface
         }
     }
 
+    public function unlockTopic($id){
+        $topicManager = new TopicManager();
+        $topic = $topicManager->findOneById($id);
+        if(\App\Session::isAdmin()){  
+            
+            
+            $topicManager->unlockTopic($id);
+
+            header("Location: index.php?ctrl=forum&action=listPosts&id=".$id);
+        }
+
+        else {
+            return [
+                //go to error page
+                "view" => BASE_DIR . "/security/error.php", 
+                "data" =>["error" => "not an admin"]
+            ];
+        }
+    }
+
 }

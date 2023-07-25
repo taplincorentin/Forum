@@ -133,4 +133,55 @@
                     ];
             }
         
+        public function changePassword($id){
+            
+            $userManager = new UserManager;
+            $user = $userManager->findOneById($id);
+            
+
+            if(\App\Session::getUser()==$user){     
+
+                if(isset($_POST['submit'])){
+                    $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+                    $password2 = filter_input(INPUT_POST, "password2", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+                
+                    if($password && $password2){
+                        //if username or email exists
+                        if($password == $password2 && strlen($password) > 7){
+                            var_dump($password);
+                            $data =["password"=> password_hash($password, PASSWORD_DEFAULT)];
+                            var_dump($data);die;
+                            $userManager->add($data);
+
+                            /*session_unset();
+                            session_destroy();*/
+
+                            header("Location: /security/login.html");
+                        }
+                        else{
+                            return [
+                                //go to error page
+                                "view" => BASE_DIR . "/security/error.php", 
+                                "data" =>["error" => "two passwords aren't the same or not enough characters "]
+                            ];
+                        }
+                    }
+                }
+                else{
+                    return [
+                        "view" => BASE_DIR . "/security/editPasswordForm.php",
+                        "data" => [
+                            "post" => $userManager->findOneById($id)
+                        ]
+                    ];
+                }
+            }
+            else {
+                return [
+                    //go to error page
+                    "view" => BASE_DIR . "/security/error.php", 
+                    "data" =>["error" => "not right user"]
+                ];
+            }
+        }        
     }

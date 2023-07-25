@@ -334,7 +334,7 @@ class ForumController extends AbstractController implements ControllerInterface
 
     public function unlockTopic($id){
         $topicManager = new TopicManager();
-        $topic = $topicManager->findOneById($id);
+        
         if(\App\Session::isAdmin()){  
             
             

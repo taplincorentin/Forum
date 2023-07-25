@@ -22,11 +22,15 @@ foreach ($posts as $post) {
     <p>
         <a href='index.php?ctrl=forum&action=userProfile&id=<?= $post->getUser()->getId() ?>'><?= $post->getUser()->getUsername() ?></a>
         <?= $post->getContent() ?>
-        <?= $post->getCreationdate() ?>
+        <?= $post->getCreationdate()?>
+        <?php
+        if(App\Session::getUser()->getId()==$post->getUser()->getId()){
+        ?>
         <a href="index.php?ctrl=forum&action=editPost&id=<?= $post->getId() ?>">o</a>
         
         <?php
-            if($post->getOp()==0){
+        }
+            if($post->getOp()==0 && App\Session::getUser()->getId()==$post->getUser()->getId()){
         ?>
                 <a href="index.php?ctrl=forum&action=deletePost&id=<?= $post->getId() ?>">x</a>
         <?php

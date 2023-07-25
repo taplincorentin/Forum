@@ -17,9 +17,15 @@ foreach ($topics as $topic) {
         <a href='index.php?ctrl=forum&action=listPosts&id=<?= $topic->getId() ?>'><?= $topic->getTitle() ?></a>
         <?= $topic->getCreationdate() ?>
         <a href='index.php?ctrl=forum&action=userProfile&id=<?= $topic->getUser()->getId() ?>'><?= $topic->getUser()->getUsername() ?></a>
+
+        <?php
+        if(App\Session::getUser()->getId()==$topic->getUser()->getId()){
+        ?>
         <a href="index.php?ctrl=forum&action=deleteTopic&id=<?= $topic->getId() ?>">x</a>
+        <?php } ?>
     </p>
-    <?php
+    <?php 
+
 }
 ?>
 <!-- add new topic form with first comment-->

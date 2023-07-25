@@ -90,13 +90,14 @@ class ForumController extends AbstractController implements ControllerInterface
             echo 'error';
             die;
         }
+
         //topic values
-        $data =["title"=>$title, 'user_id'=>1, 'category_id'=>$id];
+        $data =["title"=>$title, 'user_id'=>\App\Session::getUser()->getId(), 'category_id'=>$id];
         $topicManager = new TopicManager();
         $idT = $topicManager->add($data);
 
         //first post values
-        $data =["content"=>$content, 'user_id'=>1, 'topic_id'=>$idT, 'op'=>1];
+        $data =["content"=>$content, 'user_id'=>\App\Session::getUser()->getId(), 'topic_id'=>$idT, 'op'=>1];
         $postManager = new PostManager();
         $postManager->add($data);
 
@@ -122,7 +123,7 @@ class ForumController extends AbstractController implements ControllerInterface
             die;
         }
 
-        $data =["content"=>$content, 'user_id'=>1, 'topic_id'=>$id];
+        $data =["content"=>$content, 'user_id'=>\App\Session::getUser()->getId(), 'topic_id'=>$id];
         
         $postManager = new PostManager();
         $postManager->add($data);

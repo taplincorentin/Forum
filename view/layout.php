@@ -53,12 +53,13 @@
                             ?>
                             <a href="/security/login.html">Connexion</a>
                             <a href="/security/register.html">Inscription</a>
-                            <a href="index.php?ctrl=forum&action=listCategories">Categories</a>
+                            
                             <?php
                         }
 
 
                         ?>
+                        <a href="index.php?ctrl=forum&action=listCategories">Categories</a>
                     </div>
                 </nav>
             </header>

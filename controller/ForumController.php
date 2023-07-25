@@ -23,31 +23,47 @@ class ForumController extends AbstractController implements ControllerInterface
 
     public function listCategories()
     {
-        $categoryManager = new CategoryManager();
+        if(isset($_SESSION['user'])){
+            $categoryManager = new CategoryManager();
 
-        return [
-            "view" => VIEW_DIR . "forum/listCategories.php",
-            "data" => [
-                "categories" => $categoryManager->findAll(['name', 'ASC'])
-            ]
-        ];
+            return [
+                "view" => VIEW_DIR . "forum/listCategories.php",
+                "data" => [
+                    "categories" => $categoryManager->findAll(['name', 'ASC'])
+                ]
+            ];
+        }
+
+        else {
+            return [
+                "view" => BASE_DIR . "/security/login.html",
+                ];
+        }
     }
 
     public function listTopics($id)
-    {
-        $topicManager = new TopicManager();
+    {   
+        if(isset($_SESSION['user'])){
+            $topicManager = new TopicManager();
 
-        return [
-            "view" => VIEW_DIR . "forum/listTopics.php",
-            "data" => [
-                "topics" => $topicManager->findTopics($id, ['a.creationdate', 'DESC'])
-            ]
-        ];
+            return [
+                "view" => VIEW_DIR . "forum/listTopics.php",
+                "data" => [
+                    "topics" => $topicManager->findTopics($id, ['a.creationdate', 'DESC'])
+                ]
+            ];
+        }
 
+        else {
+            return [
+                "view" => BASE_DIR . "/security/login.html",
+                ];
+        }
     }
 
     public function listPosts($id)
-    {
+    {   
+
         $postManager = new PostManager();
 
         return [
@@ -61,15 +77,22 @@ class ForumController extends AbstractController implements ControllerInterface
 
     public function userProfile($id)
     {
+        if(isset($_SESSION['user'])){
+            $userManager = new UserManager();
 
-        $userManager = new UserManager();
+            return [
+                "view" => VIEW_DIR . "forum/userProfile.php",
+                "data" => [
+                    "user" => $userManager->findOneById($id)
+                ]
+            ];
+        }
 
-        return [
-            "view" => VIEW_DIR . "forum/userProfile.php",
-            "data" => [
-                "user" => $userManager->findOneById($id)
-            ]
-        ];
+        else {
+            return [
+                "view" => BASE_DIR . "/security/login.html",
+                ];
+        }
     }
 
     public function addCategory(){
@@ -100,7 +123,7 @@ class ForumController extends AbstractController implements ControllerInterface
     }
 
     public function addTopic($id){
-        
+        if(isset($_SESSION['user'])){
             //testing added data
             if(isset($_POST['submit'])){
                 $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -131,10 +154,16 @@ class ForumController extends AbstractController implements ControllerInterface
                 }
             }
         }        
-    
+        
+        else {
+            return [
+                "view" => BASE_DIR . "/security/login.html",
+                ];
+        }
+    }
 
     public function addPost($id){
-
+        if(isset($_SESSION['user'])){
             //testing added data
             if(isset($_POST['submit'])){
                 $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -158,7 +187,13 @@ class ForumController extends AbstractController implements ControllerInterface
                 }
             }
         }
-    
+
+        else {
+            return [
+                "view" => BASE_DIR . "/security/login.html",
+                ];
+        }
+    }
 
 
     public function deletePost($id){

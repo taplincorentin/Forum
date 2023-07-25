@@ -18,7 +18,6 @@ $topic = $posts->current()->getTopic();
             lock topic
         </a>
 <?php
-    var_dump(\App\Session::getUser());die;
     }
 //get each postInfos and display
 foreach ($posts as $post) {

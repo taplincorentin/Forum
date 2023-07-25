@@ -19,6 +19,12 @@
         }
 
         public function register(){
+            if((isset($_SESSION['user']))){
+                return [
+                    "view" => VIEW_DIR . "home.php"
+                    ];
+            }
+            else{
             if(isset($_POST['submit'])){
                 $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
                 $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);
@@ -58,9 +64,17 @@
                     ];
                 }
             }
+            }
         }
 
         public function login(){
+
+            if((isset($_SESSION['user']))){
+                return [
+                    "view" => VIEW_DIR . "home.php"
+                    ];
+            }
+
             if(isset($_POST['submit'])){
 
                 $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL);

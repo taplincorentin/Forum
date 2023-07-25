@@ -12,6 +12,7 @@ final class Topic extends Entity
         private $creationdate;
         private int $locked;
         private Category $category;
+        //private int $nbPosts;
 
         public function __construct($data)
         {

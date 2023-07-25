@@ -24,6 +24,14 @@ if(\App\Session::isAdmin()){
                 <input type='text' name='name'>
             </p>
             <p>
+                <label>topic title</label>
+                <input type='text' name='title'>
+            </p>
+            <p>
+                <label>first post</label>
+                <textarea name = 'content' placeholder="your comment"></textarea>
+            </p>
+            <p>
                 <input type='submit' name='submit' value="Add category">
             </p>
         </div>

@@ -107,12 +107,26 @@ class ForumController extends AbstractController implements ControllerInterface
             //testing added data
             if(isset($_POST['submit'])){
                 $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+                $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
+                $content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES);
             
                 //checking there are no null or false value after filter
-                if($name){
+                if($name && $title && $content){
+                    //category values
                     $data =["name"=>$name];
                     $categoryManager = new CategoryManager();
                     $idC = $categoryManager->add($data);
+
+                    //topic values
+                    $data =["title"=>$title, 'user_id'=>\App\Session::getUser()->getId(), 'category_id'=>$idC];
+                    $topicManager = new TopicManager();
+                    $idT = $topicManager->add($data);
+
+                    //first post values
+                    $data =["content"=>$content, 'user_id'=>\App\Session::getUser()->getId(), 'topic_id'=>$idT, 'op'=>1];
+                    $postManager = new PostManager();
+                    $postManager->add($data);
+
 
                     header("Location: index.php?ctrl=forum&action=listTopics&id=".$idC);
                 }

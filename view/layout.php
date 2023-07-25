@@ -41,11 +41,13 @@
                         <?php
 
                         if (App\Session::getUser()) {
+                            
                             ?>
-                            <a href="/security/viewProfile.html"><span class="fas fa-user"></span>&nbsp;
-                                <?= App\Session::getUser() ?>
+                        
+                            <a href="index.php?ctrl=forum&action=userProfile&id=<?= App\Session::getUser()->getId() ?>"><span class="fas fa-user"></span>&nbsp;
+                                <?= App\Session::getUser()->getUsername() ?>
                             </a>
-                            <a href="/security/logout.html">Déconnexion</a>
+                            <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
                             <?php
                         } else {
                             ?>

@@ -109,7 +109,7 @@
                 session_destroy();
 
                 return [
-                    "view" => VIEW_DIR . "home.php"
+                    "view" => BASE_DIR . "/security/login.html",
                     ];
             }
         }

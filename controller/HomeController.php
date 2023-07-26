@@ -41,7 +41,7 @@ use Model\Managers\UserManager;
                 return [
                     //go to error page
                     "view" => BASE_DIR . "/security/error.php", 
-                    "data" =>["error" => "problem in input of name"]
+                    "data" =>["error" => "you don't have the rights, son!"]
                 ];
             }
         }

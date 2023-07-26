@@ -12,11 +12,11 @@ $topics = $result["data"]['topics'];
 
 foreach ($topics as $topic) {
     ?>
-    <p>
-        
+    <p>        
         <a href='index.php?ctrl=forum&action=listPosts&id=<?= $topic->getId() ?>'><?= $topic->getTitle() ?></a>
         <?= $topic->getCreationdate() ?>
         <a href='index.php?ctrl=forum&action=userProfile&id=<?= $topic->getUser()->getId() ?>'><?= $topic->getUser()->getUsername() ?></a>
+        <?= $topic->getNbPosts() ?>
 
         <?php
         if(App\Session::getUser()->getId()==$topic->getUser()->getId() or \App\Session::isAdmin()){

@@ -22,8 +22,11 @@ class TopicManager extends Manager
             "ORDER BY " . $order[0] . " " . $order[1] :
             "";
 
-
-        $sql = "SELECT * FROM " . $this->tableName . " a WHERE a.category_id =" . $id . " " . $orderQuery;
+        $sql = "SELECT id_topic, title, t.creationDate, t.user_id, t.locked, t.category_id, COUNT(p.topic_id) AS nbPosts
+            FROM topic t
+            LEFT JOIN post p ON p.topic_id = t.id_topic
+            WHERE t.category_id = " . $id ." GROUP BY t.id_topic " .$orderQuery;
+        
 
         return $this->getMultipleResults(
             DAO::select($sql),

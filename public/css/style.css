@@ -1,5 +1,6 @@
 table, th, td {
     border: 1px solid #ccc;
+    border-collapse: collapse;
     flex-grow: 1;
     text-align: center;
     background-color: #f2f2f2;
@@ -10,8 +11,9 @@ table, th, td {
     flex-direction: column;
     align-items: center;
 }
-.topics{
+.topics, .posts{
     display: flex;
+    flex-direction: column;
     padding-bottom: 20px;
     width: 75%;
     font-size: 1.2em;

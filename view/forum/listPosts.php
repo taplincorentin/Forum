@@ -17,41 +17,46 @@ $topic = $posts->current()->getTopic();
         <a href="index.php?ctrl=forum&action=lockTopic&id=<?=$id?>">
             lock topic
         </a>
-<?php
-    }
-//get each postInfos and display
+<?php } ?>
+<div class ='posts'>
+<?php //get each postInfos and display
 foreach ($posts as $post) {
-    ?>
-    <table>
+?>
+    <table style="width:100%">
         <tr>
-            <th><?= $post->getCreationdate()?></th>
+            <th colspan="2"><?= $post->getCreationdate()?></th>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
+            <td style="width:25%">
+                <a href='index.php?ctrl=forum&action=userProfile&id=<?= $post->getUser()->getId() ?>'><?= $post->getUser()->getUsername() ?></a><br>
+                <?= $post->getUser()->getRole() ?><br>
+                joined : <?= $post->getUser()->getCreationdate() ?>
+            </td>
+            <td><?= $post->getContent() ?></td>
+            <td>
+                <?php if(App\Session::getUser()->getId()==$post->getUser()->getId() or App\Session::isAdmin()){?>
+                        <a href="index.php?ctrl=forum&action=editPost&id=<?= $post->getId() ?>">o</a>
+                    <?php } ?>
+            </td>
+            <td>
+                <?php if($post->getOp()==0 && (App\Session::getUser()->getId()==$post->getUser()->getId() or App\Session::isAdmin())){ ?>
+                        <a href="index.php?ctrl=forum&action=deletePost&id=<?= $post->getId() ?>">x</a>
+                    <?php } ?>
+            </td>
         </tr>
     </table>
     <p>
-        <a href='index.php?ctrl=forum&action=userProfile&id=<?= $post->getUser()->getId() ?>'><?= $post->getUser()->getUsername() ?></a>
-        <?= $post->getContent() ?>
         
-        <?php
-        if(App\Session::getUser()->getId()==$post->getUser()->getId() or App\Session::isAdmin()){
-        ?>
-        <a href="index.php?ctrl=forum&action=editPost&id=<?= $post->getId() ?>">o</a>
         
-        <?php
-        }
-            if($post->getOp()==0 && (App\Session::getUser()->getId()==$post->getUser()->getId() or App\Session::isAdmin())){
-        ?>
-                <a href="index.php?ctrl=forum&action=deletePost&id=<?= $post->getId() ?>">x</a>
-        <?php
-            }
-        ?>
+        
+        
+        
         
     </p>
-    <?php
-}
+<?php } ?>
+</div>
+
+<?php
 //check if topic is locked before showing post form
 if($post->getTopic()->getLocked()==0){ 
 ?>

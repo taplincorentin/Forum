@@ -12,7 +12,7 @@ final class Topic extends Entity
         private $creationdate;
         private int $locked;
         private Category $category;
-        //private int $nbPosts;
+        private int $nbPosts;
 
         public function __construct($data)
         {
@@ -44,6 +44,10 @@ final class Topic extends Entity
                 return $this->category;
         }
 
+        public function getNbPosts(){
+                return $this->nbPosts;
+        }
+
         public function setId($id) {
                 $this->id = $id;
                 return $this;
@@ -71,6 +75,10 @@ final class Topic extends Entity
 
         public function setCategory($category){
                 $this->category = $category;
+                return $this;
+        }
+        public function setNbPosts($nbPosts){
+                $this->nbPosts = $nbPosts;
                 return $this;
         }
 

@@ -46,4 +46,10 @@ class TopicManager extends Manager
 
         return DAO::update($sql, ['id' => $id]);
     }
+
+    public function getNbPosts($id){
+        $sql = "SELECT COUNT(id_post) AS nbPosts FROM post WHERE topic_id = :id";
+
+        return DAO::update($sql, ['id' => $id]);
+    }
 }

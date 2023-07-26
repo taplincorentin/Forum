@@ -22,10 +22,19 @@ $topic = $posts->current()->getTopic();
 //get each postInfos and display
 foreach ($posts as $post) {
     ?>
+    <table>
+        <tr>
+            <th><?= $post->getCreationdate()?></th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
     <p>
         <a href='index.php?ctrl=forum&action=userProfile&id=<?= $post->getUser()->getId() ?>'><?= $post->getUser()->getUsername() ?></a>
         <?= $post->getContent() ?>
-        <?= $post->getCreationdate()?>
+        
         <?php
         if(App\Session::getUser()->getId()==$post->getUser()->getId() or App\Session::isAdmin()){
         ?>

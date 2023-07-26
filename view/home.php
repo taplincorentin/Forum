@@ -1,4 +1,11 @@
 <h1>BIENVENUE SUR LE FORUM</h1>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ut nemo quia voluptas numquam, itaque ipsa soluta ratione eum temporibus aliquid, facere rerum in laborum debitis labore aliquam ullam cumque.</p>
+
+
+<p>Bienvenue sur notre forum. Si vous ne trouvez pas ce que vous voulez, créez le</p>
+<?php
+    if(isset($_SESSION['user'])){
+?>
+        <a href="index.php?ctrl=forum&action=listCategories">Categories</a>
+    <?php }
 

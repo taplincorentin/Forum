@@ -9,7 +9,7 @@
         referrerpolicy="origin"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
         integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="<?= PUBLIC_DIR ?>/css/style.css">
+    <link rel="stylesheet" href="/public/css/style.css">
     <title>FORUM</title>
 </head>
 
@@ -56,10 +56,7 @@
                             
                             <?php
                         }
-                        if(isset($_SESSION['user'])){
-                            ?>
-                            <a href="index.php?ctrl=forum&action=listCategories">Categories</a>
-                        <?php } ?>
+                         ?>
                     </div>
                 </nav>
             </header>

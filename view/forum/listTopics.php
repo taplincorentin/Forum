@@ -6,43 +6,58 @@ $topics = $result["data"]['topics'];
 
 <h1><?= $topics->current()->getCategory()->getName() ?></h1>
 
+<div class = 'topics'>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Created on</th>
+    <th>By</th>
+    <th>Number posts</th>
+    <th></th>
+  </tr>
+
 <?php
 
 //show topics info
 
+
 foreach ($topics as $topic) {
     ?>
-    <p>        
-        <a href='index.php?ctrl=forum&action=listPosts&id=<?= $topic->getId() ?>'><?= $topic->getTitle() ?></a>
-        <?= $topic->getCreationdate() ?>
-        <a href='index.php?ctrl=forum&action=userProfile&id=<?= $topic->getUser()->getId() ?>'><?= $topic->getUser()->getUsername() ?></a>
-        <?= $topic->getNbPosts() ?>
+    <tr>    
+        <td><a href='index.php?ctrl=forum&action=listPosts&id=<?= $topic->getId() ?>'><?= $topic->getTitle() ?></a></td>
+        <td><?= $topic->getCreationdate() ?></td>
+        <td><a href='index.php?ctrl=forum&action=userProfile&id=<?= $topic->getUser()->getId() ?>'><?= $topic->getUser()->getUsername() ?></a></td>
+        <td><?= $topic->getNbPosts() ?></td>
 
         <?php
         if(App\Session::getUser()->getId()==$topic->getUser()->getId() or \App\Session::isAdmin()){
         ?>
-        <a href="index.php?ctrl=forum&action=deleteTopic&id=<?= $topic->getId() ?>">x</a>
+        <td><a href="index.php?ctrl=forum&action=deleteTopic&id=<?= $topic->getId() ?>">x</a></td>
         <?php } ?>
-    </p>
-    <?php 
+    </tr>
 
+    <?php 
 }
 ?>
+</table>
+</div>
 <!-- add new topic form with first comment-->
+<div class = 'newTopicForm'>
 <form action="index.php?ctrl=forum&action=addTopic&id=<?=$id?>" method="post">
     <div> 
         <p>
-            <label>title</label>
+            <label>Title</label>
             <input type='text' name='title'>
         </p>
         <p>
-            <label>first post</label>
-            <textarea name = 'content' placeholder="your comment"></textarea>
+            <label>First post</label>
+            <textarea name = 'content'></textarea>
         </p>
         <p>
             <input type='submit' name='submit' value="Add topic">
         </p>
     </div>
 </form>
+</div>
 
 

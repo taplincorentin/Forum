@@ -91,13 +91,6 @@ table, th, td {
     display: flex;
     align-items: center;
 }
-.topics, .posts{
-    display: flex;
-    padding-bottom: 20px;
-    width: 75%;
-    font-size: 1.2em;
-
-}
 
 
 /*User Profile*/
@@ -138,9 +131,6 @@ table, th, td {
   
 
 /*Forms*/
-
-
-
 .newTopicForm {
     border: 1px solid;
     display: flex;
@@ -149,10 +139,7 @@ table, th, td {
     width: 50%;
     background-color: #f2f2f2;
 }
-form{
-    text-align: center;
-    width: 66%;
-}
+
 input[type=text], textarea {
     width: 100%;
     padding: 12px 20px;
@@ -175,27 +162,48 @@ input[type=text], textarea {
     cursor: pointer;
   }
   
-  input[type=submit]:hover {
+input[type=submit]:hover {
     background-color: #a06345;
-  }
+}
 
-  .addCatMain{
+.addCatMain{
     float: left;
     width: 100%;
     padding: 0 20px;
     text-align: center;
-  }
+}
   
-  .addCatMain form{
+.addCatMain form{
     width: 100%;
-  }
+}
 
+/*TopicsList*/
+  .topicsMain {
+    float: left;
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.topicsMain table{
+    width: 100%;
+}
+
+.topicsRight {
+    float: left;
+    width: 33%;
+    padding: 15px;
+    margin-top: 7px;
+    text-align: center;
+    border: 1px solid orange;
+}
+  
 
 /*media queries*/
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 640px) {
     /* For mobile phones: */
     main{flex-direction: column;}
-    .menu, .main, .right {
+    .menu, .homeMain, .homeRight,.userMain, .userRight, .topicsMain, .topicsRight {
       width: 100%;
     }
 }

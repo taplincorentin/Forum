@@ -1,3 +1,26 @@
+/*Navbar*/
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: orange;
+  }
+  
+  nav li {
+    float: left;
+  }
+
+  nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+
+/*Topics/Posts Lists*/
 table, th, td {
     border: 1px solid #ccc;
     border-collapse: collapse;
@@ -19,7 +42,9 @@ table, th, td {
     font-size: 1.2em;
 
 }
-    
+
+
+/*Forms*/
 .newTopicForm {
     border: 1px solid;
     display: flex;
@@ -58,13 +83,8 @@ input[type=text], textarea {
     background-color: #a06345;
   }
 
-  
 
 
-nav{
-    display: flex;
-    justify-content: space-between;
-}
-#nav-right{
-    
-}
+
+
+/*User Profile*/

@@ -39,6 +39,10 @@ main{
 
 /*Footer*/
 .footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     background-color: orange;
     text-align: center;
     color: white;
@@ -49,6 +53,29 @@ main{
 }
 
 /*Home*/
+.homeMain{
+    float: left;
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+.homeRight{
+    float: left;
+    width: 20%;
+    text-align: center;
+    
+}
+
+.homeRight a {
+    background-color: orange;
+    padding: 8px;
+    margin-top: 7px;
+    display: block;
+    width: 100%;
+    color: white;
+    text-transform: uppercase;
+  }
 
 
 /*Topics/Posts Lists*/
@@ -72,6 +99,44 @@ table, th, td {
 
 }
 
+
+/*User Profile*/
+.userMain {
+    float: left;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+.userMain table{
+    width: 100%;
+}
+
+.userMain th{
+    width: 33%;
+}
+.userMain p{
+    text-align: center;
+    text-transform: capitalize;
+    text-decoration: underline;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.userRight {
+    background-color: orange;
+    color: white;
+    float: left;
+    width: 20%;
+    padding: 15px;
+    margin-top: 7px;
+    text-align: center;
+  }
+
+  .userRight a {
+    color: white;    
+  }
+
+  
 
 /*Forms*/
 .newTopicForm {
@@ -111,46 +176,6 @@ input[type=text], textarea {
   input[type=submit]:hover {
     background-color: #a06345;
   }
-
-
-
-/*User Profile*/
-.userMain {
-    float: left;
-    width: 100%;
-    padding: 0 20px;
-  }
-
-.userMain table{
-    width: 100%;
-}
-
-.userMain th{
-    width: 33%;
-}
-.userMain p{
-    text-align: center;
-    text-transform: capitalize;
-    text-decoration: underline;
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-.userRight {
-    background-color: orange;
-    color: white;
-    float: left;
-    width: 20%;
-    padding: 15px;
-    margin-top: 7px;
-    text-align: center;
-  }
-
-  .userRight a {
-    color: white;    
-  }
-
-
 
 /*media queries*/
 @media only screen and (max-width: 620px) {

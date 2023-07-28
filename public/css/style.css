@@ -135,10 +135,12 @@ table, th, td {
   .userRight a {
     color: white;    
   }
-
   
 
 /*Forms*/
+
+
+
 .newTopicForm {
     border: 1px solid;
     display: flex;
@@ -176,6 +178,18 @@ input[type=text], textarea {
   input[type=submit]:hover {
     background-color: #a06345;
   }
+
+  .addCatMain{
+    float: left;
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+  }
+  
+  .addCatMain form{
+    width: 100%;
+  }
+
 
 /*media queries*/
 @media only screen and (max-width: 620px) {

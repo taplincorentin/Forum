@@ -2,23 +2,23 @@
 if(\App\Session::isAdmin()){
 ?>
     <!-- add new category if admin-->
-<div>
+<div class='addCatMain'>
     <form action="index.php?ctrl=forum&action=addCategory&id=<?=$id?>" method="post">
         <div> 
             <p>
-                <label>category name</label>
+                <label>NEW CATEGORY NAME</label>
                 <input type='text' name='name'>
             </p>
             <p>
-                <label>topic title</label>
+                <label>FIRST TOPIC TITLE</label>
                 <input type='text' name='title'>
             </p>
             <p>
-                <label>first post</label>
-                <textarea name = 'content' placeholder="your comment"></textarea>
+                <label>FIRST POST CONTENT</label>
+                <textarea name = 'content'></textarea>
             </p>
             <p>
-                <input type='submit' name='submit' value="Add category">
+                <input type='submit' name='submit' value="ADD CATEGORY">
             </p>
         </div>
     </form>

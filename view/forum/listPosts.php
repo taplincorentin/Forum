@@ -1,24 +1,19 @@
 <?php
-
-$posts = $result["data"]['posts'];
-$topic = $posts->current()->getTopic();
-
+    $posts = $result["data"]['posts'];
+    $topic = $posts->current()->getTopic();
 ?>
+
 <!-- show post's topic title and topic's category name-->
-<h1><a href='index.php?ctrl=forum&action=listTopics&id=<?= $topic->getCategory()->getId()?>'><?= $topic->getCategory()->getName()?></a></h1>
-<h2><?= $topic->getTitle() ?></h2>
+<div class ='postsMain'>
+    <h1><a href='index.php?ctrl=forum&action=listTopics&id=<?= $topic->getCategory()->getId()?>'><?= $topic->getCategory()->getName()?></a></h1>
+    <h2><?= $topic->getTitle() ?></h2>
 
-<?php
-    
-    if($topic->getLocked()==0 && (\App\Session::getUser()== $topic->getUser() or \App\Session::isAdmin())){
-        
-        
-?>
+    <?php if($topic->getLocked()==0 && (\App\Session::getUser()== $topic->getUser() or \App\Session::isAdmin())){ ?>
         <a href="index.php?ctrl=forum&action=lockTopic&id=<?=$id?>">
-            lock topic
+            <i class="fa-solid fa-lock"></i>LOCK
         </a>
 <?php } ?>
-<div class ='posts'>
+
 <?php //get each postInfos and display
 foreach ($posts as $post) {
 ?>
@@ -56,35 +51,33 @@ foreach ($posts as $post) {
 <?php } ?>
 </div>
 
-<?php
-//check if topic is locked before showing post form
-if($post->getTopic()->getLocked()==0){ 
-?>
 
+<div class='postsRight'>
 
-    <form action="index.php?ctrl=forum&action=addPost&id=<?=$id?>" method="post">
-        <div> 
-            <p>
-                <textarea name = 'content' placeholder="your comment"></textarea>
-            </p>
-            <p>
-                <input type='submit' name='submit' value="Add post">
-            </p>
-        </div>
-    </form>
+    <?php
+    //check if topic is locked before showing post form
+    if($post->getTopic()->getLocked()==0){ ?>
 
-<?php
-}
+        <h2>NEW POST</h2>
+        <form action="index.php?ctrl=forum&action=addPost&id=<?=$id?>" method="post">
+            <div> 
+                <p>
+                    <textarea name = 'content'></textarea>
+                </p>
+                <p>
+                    <input type='submit' name='submit' value="ADD">
+                </p>
+            </div>
+        </form>
+    <?php }
 
-else{
-?>
+    else{ ?>
 
-    <h3>topic is locked</h3>
+        <h3>topic is locked</h3>
     
-    <?php if(App\Session::isAdmin()){    ?>
-        <a href="index.php?ctrl=forum&action=unlockTopic&id=<?= $topic->getId() ?>">unlock topic</a>
+        <?php if(App\Session::isAdmin()){    ?>
+            <a href="index.php?ctrl=forum&action=unlockTopic&id=<?= $topic->getId() ?>">unlock topic</a>
     
-
-<?php
-    }
-}
+        <?php }
+    } ?>
+</div>

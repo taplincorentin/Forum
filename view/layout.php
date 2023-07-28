@@ -14,57 +14,41 @@
 </head>
 
 <body>
-    <div id="wrapper">
-
-        <div id="mainpage">
-            <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
-            <h3 class="message" style="color: red">
-                <?= App\Session::getFlash("error") ?>
-            </h3>
-            <h3 class="message" style="color: green">
-                <?= App\Session::getFlash("success") ?>
-            </h3>
-            <header>
-                <nav>
-                    <ul>
-                                <li><a href="/">HOME</a></li>
-                        <?php
-                        if (App\Session::isAdmin()) {
-                            ?>  <li>
-                                    <a href="index.php?ctrl=home&action=users">USERS</a>
-                                </li>
-                        <?php } ?>
-                        <?php
-                        if (App\Session::getUser()) { ?>
-                                <li style="float:right">
-                                    <a href="index.php?ctrl=forum&action=userProfile&id=<?= App\Session::getUser()->getId() ?>">
-                                    <span class="fas fa-user"></span><?= App\Session::getUser()->getUsername() ?></a>
-                                </li>
-                                <li style="float:right">
-                                    <a href="index.php?ctrl=security&action=logout">LOG OUT</a>
-                                </li>
-                        <?php } 
-                        else { ?>
-                                <li>
-                                    <a href="/security/login.html">SIGN IN</a>
-                                </li>
-                                <li>
-                                    <a href="/security/register.html">REGISTER</a>
-                                </li>
-                        <?php } ?>
-                    </ul>
-                </nav>
-            </header>
-
-            <main id="forum">
-                <?= $page ?>
-            </main>
-        </div>
-        <footer>
-            <p>&copy; 2023 - Forum CDA - <a href="/home/forumRules.html">Forum Rules</a> - <a href="">Legal mentions</a></p>
-            <!--<button id="ajaxbtn">Surprise en Ajax !</button> -> cliqué <span id="nbajax">0</span> fois-->
-        </footer>
+    <div class='TheForum'>
+        <h1>THE FORUM</h1>
     </div>
+    <main>
+    <div class="menu">
+            <a href="/">HOME</a>
+        <?php if (App\Session::isAdmin()) { ?>
+            <a href="index.php?ctrl=home&action=users">USERS</a>
+        <?php } 
+        if (App\Session::getUser()) { ?>
+            <a href="index.php?ctrl=forum&action=userProfile&id=<?= App\Session::getUser()->getId() ?>"><span class="fas fa-user"></span>PROFILE</a>
+            <a href="index.php?ctrl=security&action=logout">LOG OUT</a>
+        <?php } 
+        else { ?>
+            <a href="/security/login.html">SIGN IN</a>
+            <a href="/security/register.html">REGISTER</a>
+        <?php } ?>
+    </div>  
+
+
+
+
+        <?= $page ?>
+   
+     
+        </main>
+
+    <div class='footer'>
+        <p>&copy; 2023 - Forum CDA - <a href="/home/forumRules.html">Forum Rules</a> - <a href="">Legal mentions</a></p>
+    </div>
+   
+    
+
+
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
         </script>

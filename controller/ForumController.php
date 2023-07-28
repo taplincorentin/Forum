@@ -16,29 +16,29 @@ class ForumController extends AbstractController implements ControllerInterface
 
     public function index()
     {
-        return [
-            "view" => VIEW_DIR . "home.php"
-        ];
-    }
-
-    public function listCategories(){
         //checking there is a user in session
         if(isset($_SESSION['user'])){
             $categoryManager = new CategoryManager();
 
             return [
-                "view" => VIEW_DIR . "forum/listCategories.php",
+                "view" => VIEW_DIR . "home.php",
                 "data" => [
                     "categories" => $categoryManager->findAll(['name', 'ASC'])
                 ]
             ];
         }
-
         else {
             return [
                 "view" => BASE_DIR . "/security/login.html",
                 ];
         }
+        
+    }
+
+    public function listCategories(){
+        
+
+        
     }
 
     public function listTopics($id)
@@ -131,15 +131,21 @@ class ForumController extends AbstractController implements ControllerInterface
 
                     header("Location: index.php?ctrl=forum&action=listTopics&id=".$idC);
                 }
+
+                else {
+                    return [
+                        //go to error page
+                        "view" => BASE_DIR . "/security/error.php", 
+                        "data" =>["error" => "problem in input of name"]
+                    ];
+                }
             }
-        
+
             else {
                 return [
-                    //go to error page
-                    "view" => BASE_DIR . "/security/error.php", 
-                    "data" =>["error" => "problem in input of name"]
+                    "view" => VIEW_DIR . "forum/addCategoryForm.php"
                 ];
-            }
+            }    
         }
         
     }

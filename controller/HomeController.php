@@ -5,9 +5,9 @@
     use App\Session;
     use App\AbstractController;
     use App\ControllerInterface;
-use Model\Entities\User;
-use Model\Managers\UserManager;
-    use Model\Managers\TopicCategory;
+    use Model\Entities\User;
+    use Model\Managers\UserManager;
+    use Model\Managers\CategoryManager;
     use Model\Managers\TopicManager;
     use Model\Managers\PostManager;
     
@@ -15,10 +15,22 @@ use Model\Managers\UserManager;
 
         public function index(){
             
-           
-                return [
-                    "view" => VIEW_DIR."home.php"
+           //checking there is a user in session
+        if(isset($_SESSION['user'])){
+            $categoryManager = new CategoryManager();
+
+            return [
+                "view" => VIEW_DIR . "home.php",
+                "data" => [
+                    "categories" => $categoryManager->findAll(['name', 'ASC'])
+                ]
+            ];
+        }
+        else {
+            return [
+                "view" => BASE_DIR . "/security/login.html",
                 ];
+        }
             }
             
         

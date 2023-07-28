@@ -1,8 +1,10 @@
-<h1>BIENVENUE SUR LE FORUM</h1>
+<h1>WELCOME TO OUR FORUM</h1>
 
 
 
-<p>Bienvenue sur notre forum. Si vous ne trouvez pas ce que vous voulez, créez le</p>
+<p>Welcome, if you cannot find what you are looking for, make your own post!
+    Sign in if you want to access the forum.
+</p>
 <?php
     if(isset($_SESSION['user'])){
 ?>

@@ -26,38 +26,33 @@
             </h3>
             <header>
                 <nav>
-                    <div id="nav-left">
-                        <a href="/">Accueil</a>
+                    <ul>
+                                <li><a href="/">HOME</a></li>
                         <?php
                         if (App\Session::isAdmin()) {
-                            ?>
-                            <a href="index.php?ctrl=home&action=users">Voir la liste des gens</a>
-
-                            <?php
-                        }
-                        ?>
-                    </div>
-                    <div id="nav-right">
+                            ?>  <li>
+                                    <a href="index.php?ctrl=home&action=users">USERS</a>
+                                </li>
+                        <?php } ?>
                         <?php
-
-                        if (App\Session::getUser()) {
-                            
-                            ?>
-                        
-                            <a href="index.php?ctrl=forum&action=userProfile&id=<?= App\Session::getUser()->getId() ?>"><span class="fas fa-user"></span>&nbsp;
-                                <?= App\Session::getUser()->getUsername() ?>
-                            </a>
-                            <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
-                            <?php
-                        } else {
-                            ?>
-                            <a href="/security/login.html">Connexion</a>
-                            <a href="/security/register.html">Inscription</a>
-                            
-                            <?php
-                        }
-                         ?>
-                    </div>
+                        if (App\Session::getUser()) { ?>
+                                <li style="float:right">
+                                    <a href="index.php?ctrl=forum&action=userProfile&id=<?= App\Session::getUser()->getId() ?>">
+                                    <span class="fas fa-user"></span><?= App\Session::getUser()->getUsername() ?></a>
+                                </li>
+                                <li style="float:right">
+                                    <a href="index.php?ctrl=security&action=logout">LOG OUT</a>
+                                </li>
+                        <?php } 
+                        else { ?>
+                                <li>
+                                    <a href="/security/login.html">SIGN IN</a>
+                                </li>
+                                <li>
+                                    <a href="/security/register.html">REGISTER</a>
+                                </li>
+                        <?php } ?>
+                    </ul>
                 </nav>
             </header>
 
@@ -66,8 +61,7 @@
             </main>
         </div>
         <footer>
-            <p>&copy; 2023 - Forum CDA - <a href="/home/forumRules.html">Règlement du forum</a> - <a href="">Mentions
-                    légales</a></p>
+            <p>&copy; 2023 - Forum CDA - <a href="/home/forumRules.html">Forum Rules</a> - <a href="">Legal mentions</a></p>
             <!--<button id="ajaxbtn">Surprise en Ajax !</button> -> cliqué <span id="nbajax">0</span> fois-->
         </footer>
     </div>

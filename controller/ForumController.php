@@ -35,12 +35,6 @@ class ForumController extends AbstractController implements ControllerInterface
         
     }
 
-    public function listCategories(){
-        
-
-        
-    }
-
     public function listTopics($id)
     {   
         if(isset($_SESSION['user'])){

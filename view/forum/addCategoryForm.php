@@ -2,7 +2,7 @@
 if(\App\Session::isAdmin()){
 ?>
     <!-- add new category if admin-->
-<div class='addCatMain'>
+<div class='logForm'>
     <form action="index.php?ctrl=forum&action=addCategory&id=<?=$id?>" method="post">
         <div> 
             <p>

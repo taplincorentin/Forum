@@ -13,9 +13,11 @@
     <title>FORUM</title>
 </head>
 <body>
-    <h1>ERROR</h1>
-    <?php $error =  $result["data"]["error"]?>
-    <p><?= $error ?></p>
+    <div class='logForm'>
+        <h1>ERROR</h1>
+        <?php $error =  $result["data"]["error"]?>
+        <p><?= $error ?></p>
+    </div>
 </body>
 
 </html>

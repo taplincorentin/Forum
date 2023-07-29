@@ -42,9 +42,9 @@ foreach ($posts as $post) {
                 <?= $post->getUser()->getRole() ?><br>
                 joined : <?= $post->getUser()->getCreationdate() ?>
             </td>
-            <td><?= $post->getContent() ?></td>
-            
-            
+            <td>
+                <?= $post->getContent() ?>
+            </td>    
         </tr>
     </table>
 

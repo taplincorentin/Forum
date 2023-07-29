@@ -1,4 +1,8 @@
-<form action="/index.php?ctrl=security&action=changePassword&id=<?=$id?>" method="post">
+<div class='logForm'>
+
+    <h1>PASSWORD CHANGE</h1>
+
+    <form action="/index.php?ctrl=security&action=changePassword&id=<?=$id?>" method="post">
         <div> 
             <p>
                 <label>password</label>
@@ -12,4 +16,5 @@
                 <input type='submit' name='submit' value="change password">
             </p>
         </div>
-</form>
+    </form>
+</div>

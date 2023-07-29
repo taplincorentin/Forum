@@ -19,7 +19,22 @@ foreach ($posts as $post) {
 ?>
     <table style="width:100%">
         <tr>
-            <th colspan="2"><?= $post->getCreationdate()?></th>
+            <th colspan="2" style='background-color: orange; color:white;'>
+            
+                <?= $post->getCreationdate()?>
+
+                <div class='deleteButton'>
+                    <?php if($post->getOp()==0 && (App\Session::getUser()->getId()==$post->getUser()->getId() or App\Session::isAdmin())){ ?>
+                            <a href="index.php?ctrl=forum&action=deletePost&id=<?= $post->getId() ?>"><i class="fa-solid fa-xmark" style="color: #ffffff;"></i></a>
+                    <?php } ?>
+                </div>
+
+                <div class='editButton'><?php if(App\Session::getUser()->getId()==$post->getUser()->getId() or App\Session::isAdmin()){?>
+                        <a href="index.php?ctrl=forum&action=editPost&id=<?= $post->getId() ?>"><i class="fa-solid fa-pen fa-xs" style="color: #ffffff;"></i></a>
+                    <?php } ?>
+                </div>
+
+            </th>
         </tr>
         <tr>
             <td style="width:25%">
@@ -28,28 +43,15 @@ foreach ($posts as $post) {
                 joined : <?= $post->getUser()->getCreationdate() ?>
             </td>
             <td><?= $post->getContent() ?></td>
-            <td>
-                <?php if(App\Session::getUser()->getId()==$post->getUser()->getId() or App\Session::isAdmin()){?>
-                        <a href="index.php?ctrl=forum&action=editPost&id=<?= $post->getId() ?>">o</a>
-                    <?php } ?>
-            </td>
-            <td>
-                <?php if($post->getOp()==0 && (App\Session::getUser()->getId()==$post->getUser()->getId() or App\Session::isAdmin())){ ?>
-                        <a href="index.php?ctrl=forum&action=deletePost&id=<?= $post->getId() ?>">x</a>
-                    <?php } ?>
-            </td>
+            
+            
         </tr>
     </table>
-    <p>
-        
-        
-        
-        
-        
-        
-    </p>
+
 <?php } ?>
 </div>
+
+
 
 
 <div class='postsRight'>
@@ -73,10 +75,10 @@ foreach ($posts as $post) {
 
     else{ ?>
 
-        <h3>topic is locked</h3>
+        <h3>TOPIC IS LOCKED</h3>
     
         <?php if(App\Session::isAdmin()){    ?>
-            <a href="index.php?ctrl=forum&action=unlockTopic&id=<?= $topic->getId() ?>">unlock topic</a>
+            <a href="index.php?ctrl=forum&action=unlockTopic&id=<?= $topic->getId() ?>"><i class="fa-solid fa-unlock"></i>UNLOCK</a>
     
         <?php }
     } ?>

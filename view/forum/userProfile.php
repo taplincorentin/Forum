@@ -26,7 +26,7 @@ $posts = $result["data"]["posts"];
         <p><?= $user->getUsername()?>'s page</p>
         <p>joined: <?= $user->getCreationdate() ?></p>
     <?php if($user == \App\Session::getUser()){ ?>
-        <p><a href='index.php?ctrl=security&action=changePassword&id=<?= $user->getId()?>'>Modify your password</a></p>
+        <p><a href='index.php?ctrl=security&action=changePassword&id=<?= $user->getId()?>'><i class="fa-solid fa-pen-to-square"></i>Password</a></p>
     <?php } ?>
 </div>
 

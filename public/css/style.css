@@ -114,7 +114,7 @@ input[type=submit]:hover {
 
 
 
-/*LLogin/register pages*/
+/*Login/register/userList/editPassword pages*/
 .logForm{
   float: left;
     width: 100%;
@@ -206,12 +206,16 @@ input[type=submit]:hover {
     border: 1px solid orange;
 }
 
+.deleteButton, .editButton{
+  float: right;
+}
+
 
 /*media queries*/
 @media only screen and (max-width: 640px) {
     /* For mobile phones: */
     main{flex-direction: column;}
-    .menu, .homeMain, .homeRight,.userMain, .userRight, .topicsMain, .topicsRight, .logForm {
+    .menu, .homeMain, .homeRight,.userMain, .userRight, .topicsMain, .topicsRight, .postsMain, .postsRight, .logForm {
       width: 100%;
     }
 }

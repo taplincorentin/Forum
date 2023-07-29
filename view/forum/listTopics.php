@@ -7,28 +7,32 @@ $topics = $result["data"]['topics'];
 <div class = 'topicsMain'>
     <h1><?= $topics->current()->getCategory()->getName() ?></h1>
 
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Created on</th>
-            <th>By</th>
-            <th>Number posts</th>
-            <th></th>
-        </tr>
+
     
-        <?php
+        <?php //get eack topicsInfos
         foreach ($topics as $topic) { ?>
-        <tr>    
-            <td><a href='index.php?ctrl=forum&action=listPosts&id=<?= $topic->getId() ?>'><?= $topic->getTitle() ?></a></td>
-            <td><?= $topic->getCreationdate() ?></td>
-            <td><a href='index.php?ctrl=forum&action=userProfile&id=<?= $topic->getUser()->getId() ?>'><?= $topic->getUser()->getUsername() ?></a></td>
-            <td><?= $topic->getNbPosts() ?></td>
-        <?php if(App\Session::getUser()->getId()==$topic->getUser()->getId() or \App\Session::isAdmin()){ ?>
-            <td><a href="index.php?ctrl=forum&action=deleteTopic&id=<?= $topic->getId() ?>">x</a></td>
-        <?php } ?>
+        <table style="width:100%">
+        <tr>
+            <th colspan="3" style='background-color: orange; color:white;'>
+
+                <?= $topic->getCreationdate()?>
+
+                <div class='deleteButton'><?php if(App\Session::getUser()->getId()==$topic->getUser()->getId() or \App\Session::isAdmin()){ ?>
+                        <a href="index.php?ctrl=forum&action=deleteTopic&id=<?= $topic->getId() ?>"><i class="fa-solid fa-pen fa-xs" style="color: #ffffff;"></i></a>
+                    <?php } ?>
+                </div>
+            </th>
         </tr>
-        <?php } ?>
+        <tr>    
+            <td style="width:50%"><a href='index.php?ctrl=forum&action=listPosts&id=<?= $topic->getId() ?>'><?= $topic->getTitle() ?></a></td>
+            
+            <td><a href='index.php?ctrl=forum&action=userProfile&id=<?= $topic->getUser()->getId() ?>'>by <?= $topic->getUser()->getUsername() ?></a></td>
+            
+            <td><?= $topic->getNbPosts() ?> post(s)</td>
+        </tr>
+        
     </table>
+    <?php } ?>
 </div>
 
 

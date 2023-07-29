@@ -5,21 +5,31 @@ $posts = $result["data"]["posts"];
 
 ?>
 <div class='userMain'>
-    <p>Latest posts</p>
-    <table>
-        <tr>
-            <th>Topic</th>
-            <th>Post</th>
-            <th>Created on</th>
-        </tr>
-        <?php foreach ($posts as $post) { ?>
-        <tr>
-            <td><a href='index.php?ctrl=forum&action=listPosts&id=<?= $post->getTopic()->getId() ?>'><?= $post->getTopic()->getTitle() ?></a></td>
-            <td><?= $post->getContent() ?></td>
-            <td><?= $post->getCreationdate()?></td>
-        </tr>
+
+    <h1>LATEST ACTIVITY</h1>
+
+
+        <?php //get each postInfos and display
+        foreach ($posts as $post) { ?>
+
+            <table style="width:100%">
+                <tr>
+                    <th colspan="2" style='background-color: orange; color:white;'>
+                        <?= $post->getCreationdate()?>
+                    </th>
+                </tr>
+                <tr>
+                    <td style="width:25%">
+                        <a href='index.php?ctrl=forum&action=listPosts&id=<?= $post->getTopic()->getId() ?>'><?= $post->getTopic()->getTitle() ?></a>
+                    </td>
+                    <td>
+                        <?= $post->getContent() ?>
+                    </td>    
+                </tr>
+            </table>
+
         <?php } ?>
-    </table>
+
 </div>
 
 <div class='userRight'>

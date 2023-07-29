@@ -27,8 +27,8 @@
             <a href="index.php?ctrl=security&action=logout">LOG OUT</a>
         <?php } 
         else { ?>
-            <a href="/security/login.html">SIGN IN</a>
-            <a href="/security/register.html">REGISTER</a>
+            <a href="index.php?ctrl=security&action=login">SIGN IN</a>
+            <a href="index.php?ctrl=security&action=register">REGISTER</a>
         <?php } ?>
     </div>  
 

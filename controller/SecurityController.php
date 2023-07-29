@@ -77,6 +77,11 @@
                     ];
                 }
             }
+            else {
+                return [
+                    "view" => BASE_DIR . "/security/register.html",
+                    ];
+            }
             }
         }
 
@@ -130,6 +135,12 @@
                         "data" =>["error" => "error in username or password"]
                     ];
                 }
+            }
+
+            else {
+                return [
+                    "view" => BASE_DIR . "/security/login.html",
+                    ];
             }
         }
 

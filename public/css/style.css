@@ -19,6 +19,14 @@ main{
     display:flex;
 }
 
+table, th, td {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  flex-grow: 1;
+  text-align: center;
+  background-color: #f2f2f2;
+}
+
 
 /*Navbar*/
 .menu {
@@ -77,20 +85,44 @@ main{
     text-transform: uppercase;
   }
 
+/*Forms*/
+input[type=text], textarea, input[type=email], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: none;
+}
 
-/*Topics/Posts Lists*/
-table, th, td {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    flex-grow: 1;
+input[type=submit] {
+  width: 100%;
+  background-color: orange;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #a06345;
+}
+
+
+
+/*LLogin/register pages*/
+.logForm{
+  float: left;
+    width: 100%;
+    padding: 0 20px;
     text-align: center;
-    background-color: #f2f2f2;
 }
 
-#forum {
-    display: flex;
-    align-items: center;
-}
+
 
 
 /*User Profile*/
@@ -130,52 +162,7 @@ table, th, td {
   }
   
 
-/*Forms*/
-.newTopicForm {
-    border: 1px solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    background-color: #f2f2f2;
-}
 
-input[type=text], textarea {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    resize: none;
-  }
-  
-  input[type=submit] {
-    width: 100%;
-    background-color: orange;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-input[type=submit]:hover {
-    background-color: #a06345;
-}
-
-.addCatMain{
-    float: left;
-    width: 100%;
-    padding: 0 20px;
-    text-align: center;
-}
-  
-.addCatMain form{
-    width: 100%;
-}
 
 /*TopicsList*/
   .topicsMain {
@@ -224,7 +211,7 @@ input[type=submit]:hover {
 @media only screen and (max-width: 640px) {
     /* For mobile phones: */
     main{flex-direction: column;}
-    .menu, .homeMain, .homeRight,.userMain, .userRight, .topicsMain, .topicsRight {
+    .menu, .homeMain, .homeRight,.userMain, .userRight, .topicsMain, .topicsRight, .logForm {
       width: 100%;
     }
 }
